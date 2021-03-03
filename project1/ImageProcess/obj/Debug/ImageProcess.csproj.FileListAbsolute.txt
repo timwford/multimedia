@@ -1,0 +1,10 @@
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.csprojAssemblyReference.cache
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\bin\Debug\ImageProcess.exe.config
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\bin\Debug\ImageProcess.exe
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\bin\Debug\ImageProcess.pdb
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.MainForm.resources
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.Properties.Resources.resources
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.csproj.GenerateResource.cache
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.csproj.CoreCompileInputs.cache
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.exe
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.pdb
