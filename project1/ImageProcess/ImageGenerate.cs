@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System;
+using System.Collections.Generic;
 
 namespace ImageProcess
 {
@@ -43,6 +44,19 @@ namespace ImageProcess
                 for (int c = 0; c < image.BaseImage.Width ; c++)
                 {
                     image.BaseImage.SetPixel(c, r, Color.White);
+                }
+            }
+
+        }
+
+        public static void FillPostWhite(Image image)
+        {
+            for (int r = 0; r < image.PostImage.Height; r++)
+            {
+                // Looping over the columns of the array
+                for (int c = 0; c < image.PostImage.Width; c++)
+                {
+                    image.PostImage.SetPixel(c, r, Color.White);
                 }
             }
 
@@ -285,6 +299,137 @@ namespace ImageProcess
             }
         }
 
+        public static void Sobel(Image image)
+        {
+            int[] x_kernel = {
+                2, 2, 4, 2, 2,
+                1, 1, 2, 1, 1,
+                0, 0, 0, 0, 0,
+                -1, -1, -2, -1, -1,
+                -2, -2, -4, -2, -2
+            };
+
+            int[] y_kernel = {
+                -2, -1, 0, 1, -2,
+                -2, -1, 0, 1, -2,
+                -4, -2, 0, 2, -4,
+                -2, -1, 0, 1, -2,
+                -2, -1, 0, 1, -2
+            };
+
+            for (int r = 2; r < (image.BaseImage.Height - 2); r++)
+            {
+                for (int c = 2; c < (image.BaseImage.Width - 2); c++)
+                {
+                    Color xCol = Kernel(c, r, image, x_kernel);
+                    Color yCol = Kernel(c, r, image, y_kernel);
+
+                    image.PostImage.SetPixel(c, r, euclideanDist(xCol, yCol));
+                }
+            }
+        }
+
+        public static void rotateImage(Image image, int degrees)
+        {
+            if (image == null) return;
+
+            using (Graphics graphics = Graphics.FromImage(image.BaseImage))
+            {
+                graphics.TranslateTransform(image.BaseImage.Width / 2, image.BaseImage.Height / 2);
+                graphics.RotateTransform(degrees);
+                graphics.TranslateTransform(-image.BaseImage.Width / 2, -image.BaseImage.Height / 2);
+                FillWhite(image);
+                graphics.DrawImage(image.PostImage, new Point(0, 0));
+            }
+        }
+
+        public static void flipHorizontally(Image image)
+        {
+            image.BaseImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+        }
+
+        public static void Translate(Image image, int x, int y)
+        {
+            if (image == null) return;
+
+            FillPostWhite(image);
+            
+            for (int r = 1; r < image.BaseImage.Height; r++)
+            {
+                for (int c = 1; c < image.BaseImage.Width; c++)
+                {
+                    if (c+x < image.BaseImage.Width && c+x > 0 && r + y < image.BaseImage.Height && r + y > 0)
+                    {
+                        image.PostImage.SetPixel(c + x, r + y, image.BaseImage.GetPixel(c, r));
+                    }
+                }
+            }
+        }
+
+        public static void Point(Image image)
+        {
+            if (image == null) return;
+
+            FillPostWhite(image);
+
+            // get random sample points
+            Random r = new Random();
+            int samples = (int) (0.2 * image.BaseImage.Width * image.BaseImage.Height);
+            var coords = new List<Tuple<int, int>> {};
+
+            for (int i = 0; i < samples; i++)
+            {
+                int randomX = r.Next(2, image.BaseImage.Width-2);
+                int randomY = r.Next(2, image.BaseImage.Height-2);
+                coords.Add(Tuple.Create(randomX, randomY));
+            }
+
+            for (int i = 0; i < samples; i++)
+            {
+                makePoint(image, image.BaseImage.GetPixel(coords[i].Item1, coords[i].Item2), coords[i].Item1, coords[i].Item2);
+            }
+        }
+
+        private static void makePoint(Image image, Color fill, int x, int y)
+        {
+            for (int r = y-2; r <= y+2; r++)
+            {
+                for (int c = x-2; c <= x+2; c++)
+                {
+                    image.PostImage.SetPixel(c, r, fill);
+                }
+            }
+        }
+
+        public static void BlueScreen(Image image)
+        {
+            if (image == null) return;
+
+            int a1 = 7;
+            double a2 = 1;
+            Bitmap mars = Properties.Resources.mars;
+
+            for (int r = 1; r < image.BaseImage.Height; r++)
+            {
+                for (int c = 1; c < image.BaseImage.Width; c++)
+                {
+                    Color p = image.BaseImage.GetPixel(c, r);
+                    int alpha = (int)(1 - a1 * (p.B - a2 * p.G));
+
+                    Color newP;
+                    if (alpha > 0)
+                    {
+                        newP = p;
+                    } else
+                    {
+                        newP = mars.GetPixel(c, r);
+                    }
+
+                    image.PostImage.SetPixel(c, r, newP);
+                }
+            }
+        }
+
         private static Color euclideanDist(Color xCol, Color yCol)
         {
             int rVal, gVal, bVal;
@@ -310,6 +455,80 @@ namespace ImageProcess
                 for (int c = 1; c < (image.BaseImage.Width - 1); c++)
                 {
                     image.PostImage.SetPixel(c, r, Kernel(c, r, image, kernel));
+                }
+            }
+        }
+
+        public static void RedChannelFilter(Image image)
+        {
+            for (int r = 1; r < (image.BaseImage.Height - 1); r++)
+            {
+                for (int c = 1; c < (image.BaseImage.Width - 1); c++)
+                {
+                    Color p = image.BaseImage.GetPixel(c, r);
+                    image.PostImage.SetPixel(c, r, Color.FromArgb(p.R, 0, 0));
+                }
+            }
+        }
+
+        public static void Scale(Image image, double factor)
+        {
+            FillPostWhite(image);
+
+            int xCenter = image.BaseImage.Width / 2;
+            int yCenter = image.BaseImage.Height / 2;
+
+            for (int r = 1; r < (image.BaseImage.Height - 1); r++)
+            {
+                for (int c = 1; c < (image.BaseImage.Width - 1); c++)
+                {
+                    Color p = image.BaseImage.GetPixel(c, r);
+                    int newX = (int)(xCenter + (c - xCenter) * factor);
+                    int newY = (int)(yCenter + (r - yCenter) * factor);
+                    image.PostImage.SetPixel(newX, newY, p);
+                }
+            }
+        }
+
+        public static void Triangle(Image image)
+        {
+            FillPostWhite(image);
+
+            int xCenter = image.BaseImage.Width / 2;
+            int yCenter = image.BaseImage.Height / 2;
+
+            double scale;
+
+            for (int r = 0; r < image.BaseImage.Height; r++)
+            {
+                for (int c = 0; c < image.BaseImage.Width; c++)
+                {   
+                    scale = (r / ((double) image.BaseImage.Height + 0.01));
+                    Console.WriteLine(scale);
+                    Color p = image.BaseImage.GetPixel(c, r);
+                    int newX = (int)(xCenter + ((c - xCenter) * scale));
+                    int newY = (int)(yCenter + ((r - yCenter) * scale));
+                    if (newX < image.BaseImage.Width && newX > 0 && newY < image.BaseImage.Height && newY > 0)
+                    {
+                        image.PostImage.SetPixel(newX, newY, p);
+                    }
+                }
+            }
+        }
+
+        public static void ComposeRed(Image image)
+        {
+            Color red = Color.FromArgb(255, 0, 0);
+            double alpha = 0.2;
+
+            for (int r = 1; r < (image.BaseImage.Height - 1); r++)
+            {
+                for (int c = 1; c < (image.BaseImage.Width - 1); c++)
+                {
+                    Color p = image.BaseImage.GetPixel(c, r);
+                    Color newP = Color.FromArgb(ClampColorElem((alpha * Color.Red.R) + p.R), p.G, p.B);
+
+                    image.PostImage.SetPixel(c, r, newP);
                 }
             }
         }

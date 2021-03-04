@@ -1,20 +1,32 @@
 ﻿/*
 
-Mark off what items are complete (e.g. x, done, checkmark, etc), and put a P if partially complete. If 'P' include how to test what is working for partial credit below the checklist line.
+Mark off what items are complete, and put a P if partially complete. For the categories, name the filter and its points. If you crete more than one per category, list their names and their poitns below the required command for that catagory.
 
-Total available points:  100
+Total available points:  200 (250 for CSC 692)
 
-___x___	25	Tutorial completed (if not, what was the last section completed)
-___x___	10	My Favorite Color
-___x___	5	Horizontal Gradient Image
-___x___	5	Vertical Gradient Image
-___x___	10	Diagonal Gradient Image
-___x___	5	Horizontal Line
-___x___	5	Vertical Wider Line
-___x___	10	Diagonal Line
-___x___	10	Monochrome Image Filter
-___x___	15	Median Filter
-______	Total (please add the points and include the total here)
+ _x_ 8pt make a new\open\save image under a File Menu and add Project 1 menu
+ _x_ 2pt display the current state of the image 
+ _x_ 10pt A 3X3 sharpen filter 
+ _x_ 15pt A 5X5 Prewit filter 
+ _x_ 10pt A rotate about the center (uses a dialog box to set the amount) 
+ _x_ 15pt A flip horizontally and translate (x and y) afterwards (uses a dialog box to set the amount) 
+ _x_ 20pt A blue screen composition. You may use a default image for the mask. 
+ 
+_Pointilize__       [30pt] Required Blur\Sharpen\Contrast\Filter
+
+_Sobel_______       [10pt] Required Feature Extraction
+_Red Channel filter [10pt] Other Feature Extraction
+
+_Scale_______       [20pt] Required Linear warp
+
+_Triangle____       [30pt] Required Non-linear warp ** THIS ONE HAS BUGS (see below) ** 
+
+_Red Screen__       [20pt] Required Composition
+
+Total: 220ish
+
+Bugs:
+- The only bug I know of is that my Triangle warp doesn't quite work and I didn't have a chance to fix it, I think it's close
 
  */
 
@@ -119,7 +131,7 @@ namespace ImageProcess
             editor.SetMode(ImageEditor.MODE.Draw);
 
             drawMenu.Checked = editor.MouseMode == ImageEditor.MODE.Draw;
-         
+
             Invalidate();
         }
 
@@ -318,6 +330,65 @@ namespace ImageProcess
         private void prewittToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImageGenerate.Prewitt(model);
+        }
+
+        private void rotateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RotateForm rotateDialog = new RotateForm("Rotate by degrees (integer):");
+            rotateDialog.ShowDialog();
+
+            ImageGenerate.rotateImage(model, rotateDialog.value);
+        }
+
+        private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.flipHorizontally(model);
+        }
+
+        private void translateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TranslateForm dialog = new TranslateForm();
+            dialog.ShowDialog();
+
+            ImageGenerate.Translate(model, dialog.xTran, dialog.yTran);
+        }
+
+        private void blueScreenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.BlueScreen(model);
+        }
+
+        private void sobelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.Sobel(model);
+        }
+
+        private void redFilterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.RedChannelFilter(model);
+        }
+
+        private void linearWarpscaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 dialog = new Form1();
+            dialog.ShowDialog();
+
+            ImageGenerate.Scale(model, dialog.value);
+        }
+
+        private void triangelWarpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.Triangle(model);
+        }
+
+        private void compositionRedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.ComposeRed(model);
+        }
+
+        private void pointilismToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageGenerate.Point(model);
         }
     }
 }

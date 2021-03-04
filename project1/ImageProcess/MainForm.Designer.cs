@@ -62,11 +62,21 @@
             this.diagonalLineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monochromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medianToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.project1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sharpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prewittToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rotateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flipHorizontalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.translateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blueScreenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sobelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.redFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.linearWarpscaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.triangelWarpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compositionRedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.pointilismToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -335,21 +345,21 @@
             this.medianToolStripMenuItem.Text = "Median";
             this.medianToolStripMenuItem.Click += new System.EventHandler(this.medianToolStripMenuItem_Click);
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|PNG Files (*.png)|*.png|BMP File" +
-    "s (*.bmp)| *p.bmp|All files (*.*)|*.*";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|PNG Files (*.png)|*.png|BMP File" +
-    "s (*.bmp)| *.bmp";
-            // 
             // project1ToolStripMenuItem
             // 
             this.project1ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sharpenToolStripMenuItem,
-            this.prewittToolStripMenuItem});
+            this.prewittToolStripMenuItem,
+            this.rotateToolStripMenuItem,
+            this.flipHorizontalToolStripMenuItem,
+            this.translateToolStripMenuItem,
+            this.blueScreenToolStripMenuItem,
+            this.sobelToolStripMenuItem,
+            this.redFilterToolStripMenuItem,
+            this.linearWarpscaleToolStripMenuItem,
+            this.triangelWarpToolStripMenuItem,
+            this.compositionRedToolStripMenuItem,
+            this.pointilismToolStripMenuItem});
             this.project1ToolStripMenuItem.Name = "project1ToolStripMenuItem";
             this.project1ToolStripMenuItem.Size = new System.Drawing.Size(112, 34);
             this.project1ToolStripMenuItem.Text = "Project 1";
@@ -368,6 +378,86 @@
             this.prewittToolStripMenuItem.Text = "Prewitt";
             this.prewittToolStripMenuItem.Click += new System.EventHandler(this.prewittToolStripMenuItem_Click);
             // 
+            // rotateToolStripMenuItem
+            // 
+            this.rotateToolStripMenuItem.Name = "rotateToolStripMenuItem";
+            this.rotateToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.rotateToolStripMenuItem.Text = "Rotate";
+            this.rotateToolStripMenuItem.Click += new System.EventHandler(this.rotateToolStripMenuItem_Click);
+            // 
+            // flipHorizontalToolStripMenuItem
+            // 
+            this.flipHorizontalToolStripMenuItem.Name = "flipHorizontalToolStripMenuItem";
+            this.flipHorizontalToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.flipHorizontalToolStripMenuItem.Text = "Flip Horizontal";
+            this.flipHorizontalToolStripMenuItem.Click += new System.EventHandler(this.flipHorizontalToolStripMenuItem_Click);
+            // 
+            // translateToolStripMenuItem
+            // 
+            this.translateToolStripMenuItem.Name = "translateToolStripMenuItem";
+            this.translateToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.translateToolStripMenuItem.Text = "Translate";
+            this.translateToolStripMenuItem.Click += new System.EventHandler(this.translateToolStripMenuItem_Click);
+            // 
+            // blueScreenToolStripMenuItem
+            // 
+            this.blueScreenToolStripMenuItem.Name = "blueScreenToolStripMenuItem";
+            this.blueScreenToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.blueScreenToolStripMenuItem.Text = "Blue Screen";
+            this.blueScreenToolStripMenuItem.Click += new System.EventHandler(this.blueScreenToolStripMenuItem_Click);
+            // 
+            // sobelToolStripMenuItem
+            // 
+            this.sobelToolStripMenuItem.Name = "sobelToolStripMenuItem";
+            this.sobelToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.sobelToolStripMenuItem.Text = "Sobel";
+            this.sobelToolStripMenuItem.Click += new System.EventHandler(this.sobelToolStripMenuItem_Click);
+            // 
+            // redFilterToolStripMenuItem
+            // 
+            this.redFilterToolStripMenuItem.Name = "redFilterToolStripMenuItem";
+            this.redFilterToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.redFilterToolStripMenuItem.Text = "Red Filter";
+            this.redFilterToolStripMenuItem.Click += new System.EventHandler(this.redFilterToolStripMenuItem_Click);
+            // 
+            // linearWarpscaleToolStripMenuItem
+            // 
+            this.linearWarpscaleToolStripMenuItem.Name = "linearWarpscaleToolStripMenuItem";
+            this.linearWarpscaleToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.linearWarpscaleToolStripMenuItem.Text = "Linear warp (scale)";
+            this.linearWarpscaleToolStripMenuItem.Click += new System.EventHandler(this.linearWarpscaleToolStripMenuItem_Click);
+            // 
+            // triangelWarpToolStripMenuItem
+            // 
+            this.triangelWarpToolStripMenuItem.Name = "triangelWarpToolStripMenuItem";
+            this.triangelWarpToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.triangelWarpToolStripMenuItem.Text = "Triangel Warp";
+            this.triangelWarpToolStripMenuItem.Click += new System.EventHandler(this.triangelWarpToolStripMenuItem_Click);
+            // 
+            // compositionRedToolStripMenuItem
+            // 
+            this.compositionRedToolStripMenuItem.Name = "compositionRedToolStripMenuItem";
+            this.compositionRedToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.compositionRedToolStripMenuItem.Text = "Composition (Red)";
+            this.compositionRedToolStripMenuItem.Click += new System.EventHandler(this.compositionRedToolStripMenuItem_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|PNG Files (*.png)|*.png|BMP File" +
+    "s (*.bmp)| *p.bmp|All files (*.*)|*.*";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|PNG Files (*.png)|*.png|BMP File" +
+    "s (*.bmp)| *.bmp";
+            // 
+            // pointilismToolStripMenuItem
+            // 
+            this.pointilismToolStripMenuItem.Name = "pointilismToolStripMenuItem";
+            this.pointilismToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.pointilismToolStripMenuItem.Text = "Pointilism";
+            this.pointilismToolStripMenuItem.Click += new System.EventHandler(this.pointilismToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -376,7 +466,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "MainForm";
             this.Text = "Project 1: Ford Timothy";
             this.menuStrip1.ResumeLayout(false);
@@ -426,6 +516,16 @@
         private System.Windows.Forms.ToolStripMenuItem project1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sharpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem prewittToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rotateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem flipHorizontalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem translateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem blueScreenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sobelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem redFilterToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem linearWarpscaleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem triangelWarpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem compositionRedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pointilismToolStripMenuItem;
     }
 }
 

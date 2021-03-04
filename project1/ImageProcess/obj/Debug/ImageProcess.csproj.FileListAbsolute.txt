@@ -8,3 +8,6 @@ C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess
 C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.csproj.CoreCompileInputs.cache
 C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.exe
 C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.pdb
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.RotateForm.resources
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.TranslateForm.resources
+C:\Users\timef\Documents\multimedia\project1\ImageProcess\obj\Debug\ImageProcess.Form1.resources
