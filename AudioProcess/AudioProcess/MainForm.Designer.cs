@@ -45,6 +45,11 @@
             this.generateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sineItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sineParamsItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sinWavesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.processToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.volumeAdjustItem = new System.Windows.Forms.ToolStripMenuItem();
             this.renderFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +59,9 @@
             this.vScrollBar = new System.Windows.Forms.VScrollBar();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.fadeInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fadeInoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tremeloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -172,7 +180,12 @@
             // 
             this.generateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sineItem,
-            this.sineParamsItem});
+            this.sineParamsItem,
+            this.sinWavesToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem5});
             this.generateToolStripMenuItem.Name = "generateToolStripMenuItem";
             this.generateToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.generateToolStripMenuItem.Text = "Generate";
@@ -180,21 +193,59 @@
             // sineItem
             // 
             this.sineItem.Name = "sineItem";
-            this.sineItem.Size = new System.Drawing.Size(158, 22);
+            this.sineItem.Size = new System.Drawing.Size(180, 22);
             this.sineItem.Text = "Make Sine";
             this.sineItem.Click += new System.EventHandler(this.sineItem_Click);
             // 
             // sineParamsItem
             // 
             this.sineParamsItem.Name = "sineParamsItem";
-            this.sineParamsItem.Size = new System.Drawing.Size(158, 22);
+            this.sineParamsItem.Size = new System.Drawing.Size(180, 22);
             this.sineParamsItem.Text = "Sine Parameters";
             this.sineParamsItem.Click += new System.EventHandler(this.sineParamsItem_Click);
+            // 
+            // sinWavesToolStripMenuItem
+            // 
+            this.sinWavesToolStripMenuItem.Name = "sinWavesToolStripMenuItem";
+            this.sinWavesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sinWavesToolStripMenuItem.Text = "Sin Waves";
+            this.sinWavesToolStripMenuItem.Click += new System.EventHandler(this.sinWavesToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "234";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = "357";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem4.Text = "All";
+            this.toolStripMenuItem4.Click += new System.EventHandler(this.toolStripMenuItem4_Click);
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem5.Text = "Odd";
+            this.toolStripMenuItem5.Click += new System.EventHandler(this.toolStripMenuItem5_Click);
             // 
             // processToolStripMenuItem
             // 
             this.processToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.volumeAdjustItem});
+            this.volumeAdjustItem,
+            this.fadeInToolStripMenuItem,
+            this.fadeInoutToolStripMenuItem,
+            this.tremeloToolStripMenuItem});
             this.processToolStripMenuItem.Name = "processToolStripMenuItem";
             this.processToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.processToolStripMenuItem.Text = "Process";
@@ -260,6 +311,27 @@
             // 
             this.saveFileDialog.Filter = "Wave Files (*.wav)|*.wav| MP3 (*.mp3)|*.mp3";
             // 
+            // fadeInToolStripMenuItem
+            // 
+            this.fadeInToolStripMenuItem.Name = "fadeInToolStripMenuItem";
+            this.fadeInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fadeInToolStripMenuItem.Text = "Fade In";
+            this.fadeInToolStripMenuItem.Click += new System.EventHandler(this.fadeInToolStripMenuItem_Click);
+            // 
+            // fadeInoutToolStripMenuItem
+            // 
+            this.fadeInoutToolStripMenuItem.Name = "fadeInoutToolStripMenuItem";
+            this.fadeInoutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fadeInoutToolStripMenuItem.Text = "Fade in/out";
+            this.fadeInoutToolStripMenuItem.Click += new System.EventHandler(this.fadeInoutToolStripMenuItem_Click);
+            // 
+            // tremeloToolStripMenuItem
+            // 
+            this.tremeloToolStripMenuItem.Name = "tremeloToolStripMenuItem";
+            this.tremeloToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tremeloToolStripMenuItem.Text = "Tremelo";
+            this.tremeloToolStripMenuItem.Click += new System.EventHandler(this.tremeloToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,6 +380,14 @@
         private System.Windows.Forms.ToolStripMenuItem sineParamsItem;
         private System.Windows.Forms.ToolStripMenuItem processToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem volumeAdjustItem;
+        private System.Windows.Forms.ToolStripMenuItem sinWavesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem fadeInToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fadeInoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tremeloToolStripMenuItem;
     }
 }
 

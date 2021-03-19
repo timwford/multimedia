@@ -85,5 +85,145 @@ namespace AudioProcess
             }
         }
 
+        public void MakeSineAdditive(Sound sound)
+        {
+
+            if (sound == null)
+            {
+                MessageBox.Show("Need a sound loaded first", "Generation Error");
+                return;
+            }
+
+            //pull needed sound file encoding parameters
+            int sampleRate = sound.Format.SampleRate;
+            int channels = sound.Format.Channels;
+            float duration = sound.Duration - 1.0f / sampleRate;
+
+            //setup progress bar
+            ProgressBar progress = new ProgressBar();
+            progress.Runworker();
+
+            //make the sine wave
+            int index = 0;
+            for (double time = 0.0; time < duration; time += 1.0 / sampleRate)
+            {
+                float val = (float)(sineParams.amplitude * Math.Sin(time * 2 * Math.PI * sineParams.freq1));
+                float val2 = (float)(sineParams.amplitude * Math.Sin(time * 2 * Math.PI * sineParams.freq2));
+                sound.Samples[index] = val;
+
+                //sanity check for stereo
+                if (channels == 2)
+                {
+                    sound.Samples[index + 1] = val2;
+                }
+
+                index += channels;
+
+                progress.UpdateProgress(time / duration);
+            }
+        }
+
+        public void make234(Sound sound)
+        {
+            int[] harmonics = { 2, 3, 4 };
+            MakeHarmonics(sound, harmonics, harmonics);
+        }
+
+        public void make357(Sound sound)
+        {
+            int[] harmonics = { 3, 5, 7 };
+            MakeHarmonics(sound, harmonics, harmonics);
+        }
+
+        private int[] GetFrequencies(int freq, bool odd)
+        {
+            int niquist = 22000 / 2;
+            int max_harmonic = niquist / freq;
+            int arr_len = max_harmonic - 1;
+            if (odd)
+            {
+                arr_len /= 2;
+            }
+
+            int[] harmonics = new int[arr_len];
+
+            for (int i = 0; i < arr_len; i++)
+            {
+                int val = i + 2;
+                if (odd)
+                {
+                    val = i * 2 + 3;
+                }
+                harmonics[i] = val;
+            }
+            return harmonics;
+        }
+
+        public void makeAllHarmonics(Sound sound)
+        {
+            int[] harmonics1 = GetFrequencies((int)sineParams.freq1, false);
+            int[] harmonics2 = GetFrequencies((int)sineParams.freq2, false);
+            MakeHarmonics(sound, harmonics1, harmonics2);
+        }
+
+        public void makeOddHarmonics(Sound sound)
+        {
+            int[] harmonics = { 9 };
+            MakeHarmonics(sound, harmonics, harmonics);
+        }
+
+        public void MakeHarmonics(Sound sound, int[] harmonics1, int[] harmonics2)
+        {
+
+            if (sound == null)
+            {
+                MessageBox.Show("Need a sound loaded first", "Generation Error");
+                return;
+            }
+
+            //pull needed sound file encoding parameters
+            int sampleRate = sound.Format.SampleRate;
+            int channels = sound.Format.Channels;
+            float duration = sound.Duration - 1.0f / sampleRate;
+
+            //setup progress bar
+            ProgressBar progress = new ProgressBar();
+            progress.Runworker();
+
+            //make the sine wave
+            int index = 0;
+            for (double time = 0.0; time < duration; time += 1.0 / sampleRate)
+            {
+                sound.Samples[index] = (float)(sineParams.amplitude * Math.Sin(time * 2 * Math.PI * sineParams.freq1)); ;
+                //sanity check for stereo
+                if (channels == 2)
+                {
+                    sound.Samples[index + 1] = (float)(sineParams.amplitude * Math.Sin(time * 2 * Math.PI * sineParams.freq2));
+                }
+
+                foreach (int h in harmonics1)
+                {
+                    float amplitude = 1f / h;
+                    float val = (float)(amplitude * sineParams.amplitude * Math.Sin(time * 2 * Math.PI * h * sineParams.freq1));
+                    
+                    sound.Samples[index] += val;
+                }
+
+                foreach (int h in harmonics2)
+                {
+                    float amplitude = 1f / h;
+                    float val = (float)(amplitude * sineParams.amplitude * Math.Sin(time * 2 * Math.PI * h * sineParams.freq2));
+                    //sanity check for stereo
+                    if (channels == 2)
+                    {
+                        sound.Samples[index + 1] += val;
+                    }
+                }
+
+                index += channels;
+
+                progress.UpdateProgress(time / duration);
+            }
+        }
     }
 }

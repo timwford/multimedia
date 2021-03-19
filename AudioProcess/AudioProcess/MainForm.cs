@@ -1,4 +1,34 @@
-﻿using System;
+﻿/*
+ * 
+ * Mark off what items are complete (e.g. x, done, checkmark, etc), and put a P if partially complete. If 'P' include how to test what is working for partial credit below the checklist line.
+
+Total available points:  100
+
+___p (19.2)___	30	Tutorial completed (if not, what was the last section completed)
+______  5   CSC 692 ONLY What happened: <answer here>
+___x___	5	234 Menu Option
+___x___	5	357 Menu Option
+___x___	10	All Harmonics Option
+___x___	5	Odd Harmonics Option
+___x___	10	Ramp In/Out
+___x___	10	Tremolo
+______	10	Half Speed
+______	10	Backwards
+______  5   Did you hear it? (Completion points)
+			NASA Statement about Roswell: ____
+			Joran van der Sloot: ____
+			Nancy Pelosi: ____
+__64.2____	Total (please add the points and include the total here)
+
+Sorry, got stuck at a friends house with no internet for this one.
+
+
+ * 
+ * 
+ */
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -199,5 +229,52 @@ namespace AudioProcess
             
         }
 
+        private void sinWavesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gen.MakeSineAdditive(sound);
+            Invalidate();
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            gen.make234(sound);
+            Invalidate();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            gen.make357(sound);
+            Invalidate();
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            gen.makeAllHarmonics(sound);
+            Invalidate();
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            gen.makeOddHarmonics(sound);
+            Invalidate();
+        }
+
+        private void fadeInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            process.OnProcessVolumeRamp(sound);
+            Invalidate();
+        }
+
+        private void fadeInoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            process.OnProcessVolumeDeRamp(sound);
+            Invalidate();
+        }
+
+        private void tremeloToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            process.OnTremelo(sound);
+            Invalidate();
+        }
     }
 }
